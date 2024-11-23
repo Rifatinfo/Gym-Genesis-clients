@@ -1,11 +1,12 @@
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import logo from '../assets/dashboard/gym logo.png';
+import loginImg from '../assets/home/girl.jpg';
 import { useEffect, useState } from 'react';
 import { createTheme, Switch, ThemeProvider } from '@mui/material';
 const navLinks = [
     { name: 'Home', route: '/' },
     { name: 'Instructor', route: '/instructor' },
-    { name: 'Classes', route: '/classes' }
+    { name: 'Classes', route: '/classes' },
 ]
 
 const theme = createTheme({
@@ -29,6 +30,7 @@ const NavBar = () => {
     const [isFixed, setIsFixed] = useState(false);
     const [isDarkMode, setIsDarkMode] = useState(false);
     const [navBg, setNavBg] = useState('bg-[#15151580]');
+    const user = true;
 
 
     const toggleMobileMenu = () => {
@@ -100,12 +102,25 @@ const NavBar = () => {
                                 }
 
                                 {/* base on users */}
-                                <li><NavLink>Login</NavLink></li>
+                                {
+                                    user ? null : isLogin ? <li><NavLink to="/login" className={({ isActive }) => `font-bold ${isActive ? 'underline text-primary ' : ` ${navBg.includes('bg-transparent') ? 'text-white' : 'text-black dark:text-white'}`} hover:text-teal-600 duration-300 `}>Register</NavLink></li> :
+                                        <li><NavLink to="/login" className={({ isActive }) => `font-bold ${isActive ? 'underline text-primary ' : ` ${navBg.includes('bg-transparent') ? 'text-white' : 'text-black dark:text-white'}`} hover:text-teal-600 duration-300 `}>Login</NavLink></li>
+                                }
+                                {
+                                    user && <li>
+                                        <NavLink to="/dashboard" className={({ isActive }) => `font-bold ${isActive ? 'underline text-primary ' : ` ${navBg.includes('bg-transparent') ? 'text-white' : 'text-black dark:text-white'}`} hover:text-teal-600 duration-300 `}>Dashboard</NavLink>
+                                    </li>
+                                }
+                                {
+                                    user && <li>
+                                        <img src={loginImg} className='h-[40px] w-[40px] rounded-full' alt=""  />
+                                    </li>
+                                }
                                 <li>
                                     <ThemeProvider theme={theme}>
                                         <div className='flex flex-col justify-center items-center'>
-                                           <Switch onChange={() => setIsDarkMode(!isDarkMode)}></Switch>
-                                           <h1 className='text-[8px]'>Light/Dark</h1>
+                                            <Switch onChange={() => setIsDarkMode(!isDarkMode)}></Switch>
+                                            <h1 className='text-[8px]'>Light/Dark</h1>
                                         </div>
                                     </ThemeProvider>
                                 </li>
