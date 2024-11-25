@@ -3,6 +3,8 @@ import logo from '../assets/dashboard/gym logo.png';
 import loginImg from '../assets/home/girl.jpg';
 import { useEffect, useState } from 'react';
 import { createTheme, Switch, ThemeProvider } from '@mui/material';
+import { IoMdMenu } from "react-icons/io";
+
 const navLinks = [
     { name: 'Home', route: '/' },
     { name: 'Instructor', route: '/instructor' },
@@ -74,18 +76,28 @@ const NavBar = () => {
             setNavBg(`${isHome || location.pathname === '/' ? 'bg-transparent' : 'bg-white dark:bg-black'} dark:text-white text-white`);
         }
     }, [scrollPosition, isHome, location]);
+
+    // const handleLogout = () => {
+    //     console.log('logout');
+    // };
     return (
         <nav className=''>
             <div className="lg:w-[95%] mx-auto sm:px-6 lg:px-6">
                 <div className='flex justify-between items-center'>
                     {/* logo */}
-                    <div>
-                        <h1 className="text-2xl inline-flex items-center font-bold ">GymGenesis<img className='w-24 h-24 -ml-5' src={logo} alt="" />
+                    <div onClick={() => navigate('/')} className='flex-shrink-0 cursor-pointer pl-7 md:p-0 flex'>
+                        <h1 className="text-2xl inline-flex items-center font-bold ">CheguRafiGym<img className='w-24 h-24 -ml-5' src={logo} alt="" />
                         </h1>
+                        {/* <h1 className="text-2xl inline-flex items-center font-bold ">GymGenesis<img className='w-24 h-24 -ml-5' src={logo} alt="" />
+                        </h1> */}
                     </div>
 
                     {/* mobile menu icon */}
-
+                    <div className='md:hidden flex item-center'>
+                        <button type='button' onClick={toggleMobileMenu} className='hover:text-white focus:outline-none font-extrabold mr-3 text-3xl'>
+                            <IoMdMenu className='h-6 w-6 hover:text-primary font-extrabold' />
+                        </button>
+                    </div>
 
                     {/* Navigational Link */}
                     <div className='hidden md:block text-black dark:text-white'>
@@ -94,7 +106,7 @@ const NavBar = () => {
                                 {
                                     navLinks.map((link, idx) => (
                                         <li key={idx} >
-                                            <NavLink to={link.route} className={({ isActive }) => `font-bold ${isActive ? 'underline text-primary ' : ` ${navBg.includes('bg-transparent') ? 'text-white' : 'text-black dark:text-white'}`} hover:text-teal-600 duration-300 `}>
+                                            <NavLink to={link.route} className={({ isActive }) => `font-bold ${isActive ? 'underline text-primary ' : ` ${navBg.includes('bg-transparent') ? 'text-black' : 'dark:text-white'}`} hover:text-teal-600 duration-300 `}>
                                                 {link.name}
                                             </NavLink>
                                         </li>
@@ -104,17 +116,28 @@ const NavBar = () => {
                                 {/* base on users */}
                                 {
                                     user ? null : isLogin ? <li><NavLink to="/login" className={({ isActive }) => `font-bold ${isActive ? 'underline text-primary ' : ` ${navBg.includes('bg-transparent') ? 'text-white' : 'text-black dark:text-white'}`} hover:text-teal-600 duration-300 `}>Register</NavLink></li> :
-                                        <li><NavLink to="/login" className={({ isActive }) => `font-bold ${isActive ? 'underline text-primary ' : ` ${navBg.includes('bg-transparent') ? 'text-white' : 'text-black dark:text-white'}`} hover:text-teal-600 duration-300 `}>Login</NavLink></li>
+                                        <li><NavLink to="/login" className={({ isActive }) => `font-bold ${isActive ? 'underline text-primary ' : ` ${navBg.includes('bg-transparent') ? 'text-black' : 'text-white dark:text-white'}`} hover:text-teal-600 duration-300 `}>Login</NavLink></li>
                                 }
                                 {
                                     user && <li>
-                                        <NavLink to="/dashboard" className={({ isActive }) => `font-bold ${isActive ? 'underline text-primary ' : ` ${navBg.includes('bg-transparent') ? 'text-white' : 'text-black dark:text-white'}`} hover:text-teal-600 duration-300 `}>Dashboard</NavLink>
+                                        <NavLink to="/dashboard" className={({ isActive }) => `font-bold ${isActive ? 'underline text-primary ' : ` ${navBg.includes('bg-transparent') ? 'text-black' : 'text-white dark:text-white'}`} hover:text-teal-600 duration-300 `}>Dashboard</NavLink>
                                     </li>
                                 }
                                 {
                                     user && <li>
-                                        <img src={loginImg} className='h-[40px] w-[40px] rounded-full' alt=""  />
+                                        <img src={loginImg} className='h-[40px] w-[40px] rounded-full' alt="" />
                                     </li>
+                                }
+                                {
+                                    user && (
+                                        <li>
+                                            <NavLink
+                                                className="font-bold px-3 py-2 bg-secondary text-white rounded-xl"
+                                            >
+                                                LogOut
+                                            </NavLink>
+                                        </li>
+                                    )
                                 }
                                 <li>
                                     <ThemeProvider theme={theme}>

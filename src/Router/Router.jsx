@@ -2,9 +2,11 @@
 import {
     createBrowserRouter,
 } from "react-router-dom";
-import Home from "../Pages/Home";
 import Main from "../Main/Main";
 import ErrorPage from "../Pages/ErrorPage";
+import Instructor from "../Pages/Instructor";
+import Classes from "../Pages/Classes";
+import Home from "../Home/Home";
 
 
   export const router = createBrowserRouter([
@@ -16,6 +18,14 @@ import ErrorPage from "../Pages/ErrorPage";
         {
           path: "/",
           element: <Home></Home>,
+        },
+        {
+          path: "/instructor",
+          element: <Instructor></Instructor>,
+        },
+        {
+          path: "/classes",
+          element: <Classes></Classes>,
         },
       ],
     },
