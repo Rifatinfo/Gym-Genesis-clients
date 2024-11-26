@@ -14,6 +14,7 @@
     "@emotion/styled": "^11.13.5",
     "@mui/material": "^6.1.8",
     "@tanstack/react-query": "^5.61.0",
+    "axios": "^1.7.8",
     "localforage": "^1.10.0",
     "match-sorter": "^8.0.0",
     "react": "^18.3.1",

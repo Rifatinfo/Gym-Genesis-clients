@@ -86,10 +86,8 @@ const NavBar = () => {
                 <div className='flex justify-between items-center'>
                     {/* logo */}
                     <div onClick={() => navigate('/')} className='flex-shrink-0 cursor-pointer pl-7 md:p-0 flex'>
-                        <h1 className="text-2xl inline-flex items-center font-bold ">CheguRafiGym<img className='w-24 h-24 -ml-5' src={logo} alt="" />
-                        </h1>
-                        {/* <h1 className="text-2xl inline-flex items-center font-bold ">GymGenesis<img className='w-24 h-24 -ml-5' src={logo} alt="" />
-                        </h1> */}
+                        <h1 className="text-2xl inline-flex items-center font-bold ">GymGenesis<img className='w-24 h-24 -ml-5' src={logo} alt="" />
+                        </h1> 
                     </div>
 
                     {/* mobile menu icon */}
